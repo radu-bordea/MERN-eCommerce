@@ -1,14 +1,14 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.jpg'
 
 const Header = () => {
   return <div>
     <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
         <Container>
             <Navbar.Brand href="/">
-              <img src={logo} alt="BabyShop" />
-              BabyShop
+              <img src={logo} alt="BabyShop" width="60" height="auto" className="rounded-circle mx-2"/>
+              OleskaLt Baby Shop
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
