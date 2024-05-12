@@ -10,3 +10,5 @@
 - cd ..
 - git init
 
+// install libraries
+- npm i react-bootstrap bootstrap react-icons
