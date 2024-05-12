@@ -27,13 +27,13 @@ const products = [
   },
   {
     _id: '3',
-    name: 'Bodysuit Socks',
+    name: 'Bodysuit + Socks',
     image: '/images/bodysuit-socks.jpg',
     description:
       'pink bodysuit and tiny socks',
     brand: 'Cannon',
     category: 'Electronics',
-    price: 4.99,
+    price: 24.99,
     countInStock: 5,
     rating: 3,
     numReviews: 12,
