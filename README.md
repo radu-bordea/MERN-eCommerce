@@ -12,3 +12,6 @@
 
 // install libraries
 - npm i react-bootstrap bootstrap react-icons
+- npm i react-router-bootstrap
+- npm i react-router-dom
+
