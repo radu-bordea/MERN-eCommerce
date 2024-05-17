@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Toddler Sweater',
     image: '/images/toddler-sweater.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'White Baby Bodysuit',
     image: '/images/white-baby-bodysuit.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Bodysuit + Socks',
     image: '/images/bodysuit-socks.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Baby Sleeper',
     image: '/images/baby-sleeper.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Baby Pyjamas',
     image: '/images/baby-pyjamas.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Baby Cloth',
     image: '/images/baby-cloth.jpg',
     description:
@@ -78,7 +72,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '7',
     name: ' Baby Socks',
     image: '/images/baby-socks.jpg',
     description:
@@ -91,7 +84,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '8',
     name: ' Baby Booties',
     image: '/images/baby-booties.jpg',
     description:
