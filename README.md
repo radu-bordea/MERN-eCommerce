@@ -37,3 +37,4 @@
 - npm i -D dotenv
 
 - npm i mongoose
+- npm i bcryptjs
