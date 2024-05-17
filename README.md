@@ -38,3 +38,8 @@
 
 - npm i mongoose
 - npm i bcryptjs
+- npm i colors
+
+// adter creating seeder.js and added scripts on package.json in the root
+- npm run data:import
+- npm run data:destroy
