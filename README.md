@@ -43,3 +43,6 @@
 // adter creating seeder.js and added scripts on package.json in the root
 - npm run data:import
 - npm run data:destroy
+
+// install redux
+- npm i @reduxjs/toolkit react-redux
