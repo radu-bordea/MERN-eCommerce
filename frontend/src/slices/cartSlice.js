@@ -32,11 +32,16 @@ const cartSlice = createSlice({
       // Update the cart state and persist the changes (likely in localStorage)
       return updateCart(state);
     },
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+
+      return updateCart(state);
+    },
   },
 });
 
 // Export the addToCart action for use in other parts of the application
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 // Export the reducer to be included in the store
 export default cartSlice.reducer;
