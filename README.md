@@ -25,6 +25,8 @@
 - npm start // start the server
 
 - npm i jsonwebtoken
+- npm i cookie-parser
+
 
 
 - npm i -D nodemon concurrently
