@@ -24,6 +24,9 @@
 - add "start": "node backend/server.js" in the scripts in package.json
 - npm start // start the server
 
+- npm i jsonwebtoken
+
+
 - npm i -D nodemon concurrently
 // add scripts in the root package.json for development and run concurrently backend and frontend:
   "scripts": {
@@ -46,3 +49,5 @@
 
 // install redux
 - npm i @reduxjs/toolkit react-redux
+
+//
