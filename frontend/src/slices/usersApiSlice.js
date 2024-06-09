@@ -11,7 +11,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       // Defining the query for the login mutation.
       query: (data) => ({
         // Setting the URL for the login request. Note: `USERS_URL / auth` should be `USERS_URL + "/auth"`.
-        url: USERS_URL + "/auth",
+        url: `${USERS_URL}/auth`,
         method: 'POST', // HTTP method for the request.
         body: data // The body of the request, containing the login data.
       }),

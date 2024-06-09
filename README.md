@@ -15,6 +15,7 @@
 - npm i react-router-bootstrap
 - npm i react-router-dom
 - npm i axios
+- npm i react-toastify
 
 
 /* BACKEND */ in the root
