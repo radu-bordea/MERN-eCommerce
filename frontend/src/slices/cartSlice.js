@@ -5,7 +5,7 @@ import { updateCart } from "../utils/cartUtils";
 // Initialize the cart state. If there's a cart stored in localStorage, parse and use it; otherwise, start with an empty cart.
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [] };
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
 
 // Create a slice for the cart with an initial state and reducers to handle state changes
 const cartSlice = createSlice({
@@ -37,11 +37,15 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      return updateCart(state);
+    },
   },
 });
 
 // Export the addToCart action for use in other parts of the application
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions;
 
 // Export the reducer to be included in the store
 export default cartSlice.reducer;
