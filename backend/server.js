@@ -5,7 +5,8 @@ dotenv.config();  // Initialize environment variables
 import connectDB from "./config/db.js";  // Import function to connect to MongoDB
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";  // Custom error handling middleware
 import productRoutes from "./routes/productRoutes.js";  // Import product routes
-import userRoutes from "./routes/userRoutes.js";  // Import user routes
+import userRoutes from "./routes/userRoutes.js";  
+import orderRoutes from "./routes/orderRoutes.js";  
 const port = process.env.PORT || 5000;  // Define the port for the server
 
 connectDB();  // Connect to MongoDB
@@ -23,9 +24,10 @@ app.get("/", (req, res) => {
   res.send("API is running...");  // Basic route to check if the API is running
 });
 
-// Define routes for products and users
+// Define routes for products, users, orders
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Middleware to handle 404 errors (Not Found)
 app.use(notFound);
