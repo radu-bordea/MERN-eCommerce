@@ -8,14 +8,10 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Create an endpoint for creating a new order
     createOrder: builder.mutation({
-      // Define the query for the createOrder mutation
       query: (order) => ({
-        // Set the URL for the request to the ORDERS_URL
         url: ORDERS_URL,
-        // Specify that the HTTP method for the request is POST
-        method: "POST",
-        // Attach the order object as the request body
-        body: { ...order },
+        method: 'POST',
+        body: order,
       }),
     }),
   }),

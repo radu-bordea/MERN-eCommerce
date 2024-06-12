@@ -58,6 +58,7 @@ export const {
   removeFromCart,
   saveShippingAddress,
   savePaymentMethod,
+  clearCartItems
 } = cartSlice.actions;
 
 // Export the reducer to be included in the store
