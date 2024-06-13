@@ -10,12 +10,18 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
     createOrder: builder.mutation({
       query: (order) => ({
         url: ORDERS_URL,
-        method: 'POST',
+        method: "POST",
         body: order,
       }),
+    }),
+    getOrderDetails: builder.query({
+      query: (orderId) => ({
+        url: `${ORDERS_URL}/${orderId}`,
+      }),
+      keepUnusedDataFor: 5,
     }),
   }),
 });
 
 // Export the auto-generated hook for the createOrder mutation
-export const { useCreateOrderMutation } = ordersApiSlice;
+export const { useCreateOrderMutation, useGetOrderDetailsQuery } = ordersApiSlice;
