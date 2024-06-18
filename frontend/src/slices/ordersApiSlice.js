@@ -1,7 +1,7 @@
 // Import the apiSlice object from the local file apiSlice.js
 import { apiSlice } from "./apiSlice";
 // Import the ORDERS_URL constant from the constants.js file
-import { ORDERS_URL } from "../constants";
+import { ORDERS_URL, PAYPAL_URL } from "../constants";
 
 // Define an ordersApiSlice by injecting endpoints into the existing apiSlice
 export const ordersApiSlice = apiSlice.injectEndpoints({
@@ -20,8 +20,26 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    payOrder: builder.mutation({
+      query: ({ orderId, details }) => ({
+        url: `${ORDERS_URL}/${orderId}/pay`,
+        method: "PUT",
+        body: { ...details },
+      }),
+    }),
+    getPayPalClientId: builder.query({
+      query: () => ({
+        url: PAYPAL_URL,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
 // Export the auto-generated hook for the createOrder mutation
-export const { useCreateOrderMutation, useGetOrderDetailsQuery } = ordersApiSlice;
+export const {
+  useCreateOrderMutation,
+  useGetOrderDetailsQuery,
+  usePayOrderMutation,
+  useGetPayPalClientIdQuery,
+} = ordersApiSlice;
