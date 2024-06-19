@@ -33,8 +33,22 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST", // HTTP method for the request
       }),
     }),
+    // Adding a profile endpoint with a mutation for handling profile update requests.
+    profile: builder.mutation({
+      // Defining the query for the profile mutation.
+      query: (data) => ({
+        url: `${USERS_URL}/profile`, // Endpoint for updating user profile
+        method: "PUT", // HTTP method for the request
+        body: data, // The body of the request, containing the profile update data
+      }),
+    }),
   }),
 });
 
-// Exporting the useLoginMutation, useLogoutMutation, and useRegisterMutation hooks for use in components.
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = usersApiSlice;
+// Exporting the useLoginMutation, useLogoutMutation, useRegisterMutation, and useProfileMutation hooks for use in components.
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useRegisterMutation,
+  useProfileMutation,
+} = usersApiSlice;

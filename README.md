@@ -16,6 +16,7 @@
 - npm i react-router-dom
 - npm i axios
 - npm i react-toastify
+- npm i @paypal/react-paypal-js
 
 
 /* BACKEND */ in the root
