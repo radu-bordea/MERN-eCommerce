@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import dotenv from "dotenv"; // Load environment variables from a .env file
 import cookieParser from "cookie-parser"; // Middleware to parse cookies
@@ -7,6 +8,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js"; // Cus
 import productRoutes from "./routes/productRoutes.js"; // Import product routes
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 const port = process.env.PORT || 5000; // Define the port for the server
 
 connectDB(); // Connect to MongoDB
@@ -28,10 +30,14 @@ app.get("/", (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
 );
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // Middleware to handle 404 errors (Not Found)
 app.use(notFound);

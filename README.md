@@ -28,6 +28,7 @@
 
 - npm i jsonwebtoken
 - npm i cookie-parser
+- npm i multer
 
 
 
