@@ -42,6 +42,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data, // The body of the request, containing the profile update data
       }),
     }),
+    getUsers: builder.query({
+      query: (data) => ({
+        url: USERS_URL,
+      }),
+      providesTags: ["Users"],
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -51,4 +58,5 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation,
+  useGetUsersQuery,
 } = usersApiSlice;
