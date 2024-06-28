@@ -42,21 +42,52 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data, // The body of the request, containing the profile update data
       }),
     }),
+    // Adding a getUsers endpoint with a query for fetching a list of users.
     getUsers: builder.query({
-      query: (data) => ({
-        url: USERS_URL,
+      // Defining the query for the getUsers endpoint.
+      query: () => ({
+        url: USERS_URL, // Endpoint for fetching users
       }),
-      providesTags: ["Users"],
-      keepUnusedDataFor: 5,
+      providesTags: ["Users"], // Tags to provide for cache invalidation
+      keepUnusedDataFor: 5, // Time to keep unused data in cache
+    }),
+    // Adding a deleteUser endpoint with a mutation for handling user deletion requests.
+    deleteUser: builder.mutation({
+      // Defining the query for the deleteUser mutation.
+      query: (userId) => ({
+        url: `${USERS_URL}/${userId}`, // Endpoint for deleting a user
+        method: "DELETE", // HTTP method for the request
+      }),
+    }),
+    // Adding a getUserDetails endpoint with a query for fetching details of a specific user.
+    getUserDetails: builder.query({
+      // Defining the query for the getUserDetails endpoint.
+      query: (userId) => ({
+        url: `${USERS_URL}/${userId}`, // Endpoint for fetching user details
+      }),
+      keepUnusedDataFor: 5, // Time to keep unused data in cache
+    }),
+    // Adding an updateUser endpoint with a mutation for handling user update requests.
+    updateUser: builder.mutation({
+      // Defining the query for the updateUser mutation.
+      query: (data) => ({
+        url: `${USERS_URL}/${data.userId}`, // Endpoint for updating a user
+        method: "PUT", // HTTP method for the request
+        body: data, // The body of the request, containing the update data
+      }),
+      invalidatesTags: ["Users"], // Tags to invalidate for cache invalidation
     }),
   }),
 });
 
-// Exporting the useLoginMutation, useLogoutMutation, useRegisterMutation, and useProfileMutation hooks for use in components.
+// Exporting the useLoginMutation, useLogoutMutation, useRegisterMutation, useProfileMutation, useGetUsersQuery, useDeleteUserMutation, useGetUserDetailsQuery, and useUpdateUserMutation hooks for use in components.
 export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation,
   useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
 } = usersApiSlice;

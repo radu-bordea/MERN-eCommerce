@@ -1,24 +1,44 @@
+// Import necessary components and hooks
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { useGetUsersQuery } from "../../slices/usersApiSlice";
+import { toast } from "react-toastify";
+import {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+} from "../../slices/usersApiSlice";
 
 const UserListScreen = () => {
+  // Fetch user data using the useGetUsersQuery hook
+  // Destructure the returned data, refetch function, loading state, and error state
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
 
-  const deleteHandler = (id) => {
-    console.log("delete");
+  // Set up the deleteUser mutation hook with a loading state
+  const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
+
+  // Handler function for deleting a user
+  const deleteHandler = async (id) => {
+    if (window.confirm("Are you sure?")) {
+      try {
+        await deleteUser(id); // Attempt to delete the user
+        toast.success("User deleted"); // Show success message
+        refetch(); // Refetch the users to update the list
+      } catch (err) {
+        toast.error(err?.data?.message || err.message); // Show error message if deletion fails
+      }
+    }
   };
 
   return (
     <>
-      <h1>Users</h1>
+      <h1>Users</h1> {/* Header for the user list */}
+      {loadingDelete && <Loader />} {/* Show loader if delete operation is in progress */}
       {isLoading ? (
-        <Loader />
+        <Loader /> // Show loader if data is still loading
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">{error}</Message> // Show error message if an error occurred
       ) : (
         <Table striped hover responsive className="table-sm">
           <thead>
@@ -40,15 +60,15 @@ const UserListScreen = () => {
                 </td>
                 <td>
                   {user.isAdmin ? (
-                    <FaCheck style={{ color: "green" }} />
+                    <FaCheck style={{ color: "green" }} /> // Show check icon if user is admin
                   ) : (
-                    <FaTimes style={{ color: "red" }} />
+                    <FaTimes style={{ color: "red" }} /> // Show times icon if user is not admin
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`admin/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant="light" className="btn-sm">
-                      <FaEdit />
+                      <FaEdit /> {/* Edit button */}
                     </Button>
                   </LinkContainer>
                   <Button
@@ -56,7 +76,7 @@ const UserListScreen = () => {
                     className="btn-sm"
                     onClick={() => deleteHandler(user._id)}
                   >
-                    <FaTrash style={{color: 'white'}}/>
+                    <FaTrash style={{ color: "white" }} /> {/* Delete button */}
                   </Button>
                 </td>
               </tr>

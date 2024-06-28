@@ -32,33 +32,48 @@ const cartSlice = createSlice({
       // Update the cart state and persist the changes (likely in localStorage)
       return updateCart(state);
     },
+    // Reducer to handle removing items from the cart
     removeFromCart: (state, action) => {
+      // Filter out the item to be removed
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
 
+      // Update the cart state and persist the changes
       return updateCart(state);
     },
+    // Reducer to handle saving the shipping address
     saveShippingAddress: (state, action) => {
+      // Set the shipping address
       state.shippingAddress = action.payload;
+
+      // Update the cart state and persist the changes
       return updateCart(state);
     },
+    // Reducer to handle saving the payment method
     savePaymentMethod: (state, action) => {
+      // Set the payment method
       state.paymentMethod = action.payload;
+
+      // Update the cart state and persist the changes
       return updateCart(state);
     },
+    // Reducer to handle clearing the cart items
     clearCartItems: (state, action) => {
+      // Clear the cart items
       state.cartItems = [];
+
+      // Update the cart state and persist the changes
       return updateCart(state);
     },
   },
 });
 
-// Export the addToCart action for use in other parts of the application
+// Export the actions for use in other parts of the application
 export const {
   addToCart,
   removeFromCart,
   saveShippingAddress,
   savePaymentMethod,
-  clearCartItems
+  clearCartItems,
 } = cartSlice.actions;
 
 // Export the reducer to be included in the store

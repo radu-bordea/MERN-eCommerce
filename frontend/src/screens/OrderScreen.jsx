@@ -134,17 +134,17 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name: </strong> {order.user.name}
+                  <strong>Name: </strong> {order.user?.name}
                 </p>
                 <p>
                   <strong>Email: </strong>{" "}
-                  <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+                  <a href={`mailto:${order.user?.email}`}>{order.user?.email}</a>
                 </p>
                 <p>
                   <strong>Address:</strong>
-                  {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-                  {order.shippingAddress.postalCode},{" "}
-                  {order.shippingAddress.country}
+                  {order.shippingAddress?.address}, {order.shippingAddress?.city}{" "}
+                  {order.shippingAddress?.postalCode},{" "}
+                  {order.shippingAddress?.country}
                 </p>
                 {order.isDelivered ? (
                   <Message variant="success">

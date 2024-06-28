@@ -14,22 +14,25 @@ import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 
 const CartScreen = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook to programmatically navigate
+  const dispatch = useDispatch(); // Hook to dispatch actions to the Redux store
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const cart = useSelector((state) => state.cart); // Hook to access the cart state from the Redux store
+  const { cartItems } = cart; // Destructure cartItems from the cart state
 
+  // Handler for adding items to the cart
   const addToCartHandler = async (product, qty) => {
-    dispatch(addToCart({ ...product, qty }));
+    dispatch(addToCart({ ...product, qty })); // Dispatch addToCart action with the product and quantity
   };
 
+  // Handler for removing items from the cart
   const removeFromCartHandler = async (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id)); // Dispatch removeFromCart action with the product ID
   };
 
+    // Handler for proceeding to checkout
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping')
+    navigate('/login?redirect=/shipping')// Navigate to the login page with redirect to shipping
   }
 
   return (
