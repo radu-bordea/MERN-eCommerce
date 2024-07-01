@@ -19,7 +19,7 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
                 ? keyword
                   ? `/search/${keyword}/page/${x + 1}`  // Link for search results with keyword
                   : `/page/${x + 1}`  // Link for regular pagination
-                : `/admin/productlist/${x + 1}`  // Link for admin product list pagination
+                : `/admin/${keyword}/${x + 1}`  // Link for admin keyword(productlist, userlist) list pagination
             }
           >
             {/* Render Pagination.Item, highlighting the current page */}

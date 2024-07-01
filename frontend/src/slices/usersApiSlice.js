@@ -45,8 +45,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     // Adding a getUsers endpoint with a query for fetching a list of users.
     getUsers: builder.query({
       // Defining the query for the getUsers endpoint.
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: USERS_URL, // Endpoint for fetching users
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Users"], // Tags to provide for cache invalidation
       keepUnusedDataFor: 5, // Time to keep unused data in cache
