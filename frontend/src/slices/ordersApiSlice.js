@@ -51,8 +51,11 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
     // Create an endpoint for getting all orders
     getOrders: builder.query({
       // Define the query for getting all orders
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: ORDERS_URL, // Endpoint for getting all orders
+        params: {
+          pageNumber,
+        },
       }),
       keepUnusedDataFor: 5, // Time in seconds to keep unused data in cache
     }),
