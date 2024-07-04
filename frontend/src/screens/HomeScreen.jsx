@@ -1,6 +1,6 @@
 // Import necessary components from react-bootstrap
 import { Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // Import custom components
 import Product from "../components/Product";
 import Loader from "../components/Loader";
@@ -20,6 +20,11 @@ const HomeScreen = () => {
 
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-light mb-4">
+          Go Back
+        </Link>
+      )}
       {isLoading ? (
         // Display Loader component if data is still loading
         <Loader />
