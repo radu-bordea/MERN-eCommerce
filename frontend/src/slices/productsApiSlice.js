@@ -12,13 +12,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL, // Setting the URL for the products request.
         params: {
-          keyword,
-          pageNumber,
+          keyword, // Adding keyword parameter for filtering products.
+          pageNumber, // Adding pageNumber parameter for pagination.
         },
       }),
       keepUnusedDataFor: 5, // Time in seconds to keep unused data in cache.
       providesTags: ["Products"], // Tags to provide for cache invalidation.
     }),
+    
     // Adding a getProductDetails endpoint with a query for fetching details of a single product by ID.
     getProductDetails: builder.query({
       // Defining the query for the getProductDetails query.
@@ -27,6 +28,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5, // Time in seconds to keep unused data in cache.
     }),
+    
     // Adding a createProduct endpoint with a mutation for creating a new product.
     createProduct: builder.mutation({
       // Defining the query for the createProduct mutation.
@@ -36,6 +38,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"], // Tags to invalidate for cache invalidation.
     }),
+    
     // Adding an updateProduct endpoint with a mutation for updating an existing product.
     updateProduct: builder.mutation({
       // Defining the query for the updateProduct mutation.
@@ -46,6 +49,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Products"], // Tags to invalidate for cache invalidation.
     }),
+    
     // Adding an uploadProductImage endpoint with a mutation for uploading a product image.
     uploadProductImage: builder.mutation({
       // Defining the query for the uploadProductImage mutation.
@@ -55,6 +59,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         body: data, // The body of the request, containing the image data.
       }),
     }),
+    
     // Adding a deleteProduct endpoint with a mutation for deleting a product.
     deleteProduct: builder.mutation({
       // Defining the query for the deleteProduct mutation.
@@ -63,13 +68,25 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         method: "DELETE", // HTTP method for the request.
       }),
     }),
+    
+    // Adding a createReview endpoint with a mutation for creating a new review.
     createReview: builder.mutation({
+      // Defining the query for the createReview mutation.
       query: (data) => ({
-        url: `${PRODUCTS_URL}/${data.productId}/reviews`,
-        method: "POST",
-        body: data,
+        url: `${PRODUCTS_URL}/${data.productId}/reviews`, // Setting the URL for the create review request, including the product ID.
+        method: "POST", // HTTP method for the request.
+        body: data, // The body of the request, containing the review data.
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product"], // Tags to invalidate for cache invalidation.
+    }),
+    
+    // Adding a getTopProducts endpoint with a query for fetching top-rated products.
+    getTopProducts: builder.query({
+      // Defining the query for the getTopProducts query.
+      query: () => ({
+        url: `${PRODUCTS_URL}/top`, // Setting the URL for the top products request.
+      }),
+      keepUnusedDataFor: 5, // Time in seconds to keep unused data in cache.
     }),
   }),
 });
@@ -83,4 +100,5 @@ export const {
   useUploadProductImageMutation,
   useDeleteProductMutation,
   useCreateReviewMutation,
+  useGetTopProductsQuery, // Added correct export for useGetTopProductsQuery
 } = productsApiSlice;
