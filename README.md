@@ -17,6 +17,7 @@
 - npm i axios
 - npm i react-toastify
 - npm i @paypal/react-paypal-js
+- npm i react-helmet-async
 
 
 /* BACKEND */ in the root
