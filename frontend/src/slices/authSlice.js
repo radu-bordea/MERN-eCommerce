@@ -26,7 +26,7 @@ const authSlice = createSlice({
       // Clear the user information from the state
       state.userInfo = null;
       // Remove the user information from localStorage
-      localStorage.removeItem("userInfo");
+      localStorage.clear();
     },
   },
 });

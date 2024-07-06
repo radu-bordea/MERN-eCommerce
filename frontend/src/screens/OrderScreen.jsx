@@ -109,7 +109,7 @@ const OrderScreen = () => {
   const deliverOrderHandler = async () => {
     try {
       await deliverOrder(orderId);
-      refetch()
+      refetch();
       toast.success("Order delivered");
     } catch (err) {
       toast.error(err?.data?.message || err.message);
@@ -120,7 +120,9 @@ const OrderScreen = () => {
   if (isLoading) {
     return <Loader />;
   } else if (error) {
-    return <Message variant="danger">{error.data.message}</Message>;
+    return (
+      <Message variant="danger">{error?.data?.message || error.error}</Message>
+    );
   } else {
     console.log("Order:", order);
     console.log("Order Items:", order?.orderItems);
@@ -138,11 +140,14 @@ const OrderScreen = () => {
                 </p>
                 <p>
                   <strong>Email: </strong>{" "}
-                  <a href={`mailto:${order.user?.email}`}>{order.user?.email}</a>
+                  <a href={`mailto:${order.user?.email}`}>
+                    {order.user?.email}
+                  </a>
                 </p>
                 <p>
                   <strong>Address:</strong>
-                  {order.shippingAddress?.address}, {order.shippingAddress?.city}{" "}
+                  {order.shippingAddress?.address},{" "}
+                  {order.shippingAddress?.city}{" "}
                   {order.shippingAddress?.postalCode},{" "}
                   {order.shippingAddress?.country}
                 </p>
