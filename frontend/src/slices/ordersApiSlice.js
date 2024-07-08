@@ -58,6 +58,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         },
       }),
       keepUnusedDataFor: 5, // Time in seconds to keep unused data in cache
+      providesTags: ["Orders"], // Tags to provide for cache invalidation.
     }),
     // Create an endpoint for marking an order as delivered
     deliverOrder: builder.mutation({
