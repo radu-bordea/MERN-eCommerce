@@ -13,7 +13,7 @@ const OrderListScreen = () => {
 
   // Fetch orders data using useGetOrdersQuery hook
   const { data, isLoading, error } = useGetOrdersQuery({ pageNumber });
-
+console.log(data);
   // Log orders data to console for debugging purposes
 
   return (
@@ -43,7 +43,7 @@ const OrderListScreen = () => {
             </thead>
             <tbody>
               {/* Map over orders to display each order as a row in the table */}
-              {data.orders.map((order) => (
+              {data?.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td> {/* Display order ID */}
                   <td>{order.user && order.user.name}</td>{" "}
