@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 const { PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET, PAYPAL_API_URL } = process.env;
 
@@ -12,30 +12,44 @@ const { PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET, PAYPAL_API_URL } = process.env;
  */
 async function getPayPalAccessToken() {
   // Authorization header requires base64 encoding
-  const auth = Buffer.from(PAYPAL_CLIENT_ID + ':' + PAYPAL_APP_SECRET).toString(
-    'base64'
+  const auth = Buffer.from(PAYPAL_CLIENT_ID + ":" + PAYPAL_APP_SECRET).toString(
+    "base64"
   );
 
   const url = `${PAYPAL_API_URL}/v1/oauth2/token`;
 
   const headers = {
-    Accept: 'application/json',
-    'Accept-Language': 'en_US',
+    Accept: "application/json",
+    "Accept-Language": "en_US",
     Authorization: `Basic ${auth}`,
+    "Content-Type": "application/x-www-form-urlencoded",
   };
 
-  const body = 'grant_type=client_credentials';
-  const response = await fetch(url, {
-    method: 'POST',
-    headers,
-    body,
-  });
+  const body = "grant_type=client_credentials";
 
-  if (!response.ok) throw new Error('Failed to get access token');
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body,
+    });
 
-  const paypalData = await response.json();
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      console.error(
+        "Failed to get access token:",
+        response.status,
+        errorResponse
+      );
+      throw new Error(`Failed to get access token: ${response.statusText}`);
+    }
 
-  return paypalData.access_token;
+    const paypalData = await response.json();
+    return paypalData.access_token;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+    throw new Error("Failed to get access token");
+  }
 }
 
 /**
@@ -51,7 +65,7 @@ export async function checkIfNewTransaction(orderModel, paypalTransactionId) {
   try {
     // Find all documents where Order.paymentResult.id is the same as the id passed paypalTransactionId
     const orders = await orderModel.find({
-      'paymentResult.id': paypalTransactionId,
+      "paymentResult.id": paypalTransactionId,
     });
 
     // If there are no such orders, then it's a new transaction.
@@ -76,16 +90,16 @@ export async function verifyPayPalPayment(paypalTransactionId) {
     `${PAYPAL_API_URL}/v2/checkout/orders/${paypalTransactionId}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     }
   );
-  if (!paypalResponse.ok) throw new Error('Failed to verify payment');
+  if (!paypalResponse.ok) throw new Error("Failed to verify payment");
 
   const paypalData = await paypalResponse.json();
   return {
-    verified: paypalData.status === 'COMPLETED',
+    verified: paypalData.status === "COMPLETED",
     value: paypalData.purchase_units[0].amount.value,
   };
 }
