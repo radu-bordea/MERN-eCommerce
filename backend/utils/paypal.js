@@ -19,10 +19,9 @@ async function getPayPalAccessToken() {
   const url = `${PAYPAL_API_URL}/v1/oauth2/token`;
 
   const headers = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Accept-Language': 'en_US',
-    'Authorization': `Basic ${auth}`,
-    'Content-Type': 'application/x-www-form-urlencoded'
+    Authorization: `Basic ${auth}`,
   };
 
   const body = 'grant_type=client_credentials';
@@ -39,12 +38,6 @@ async function getPayPalAccessToken() {
   return paypalData.access_token;
 }
 
-// Call the function and handle potential errors
-getPayPalAccessToken()
-  .then(token => console.log('Access Token:', token))
-  .catch(error => console.error('Error:', error));
-
-  
 /**
  * Checks if a PayPal transaction is new by comparing the transaction ID with existing orders in the database.
  *

@@ -29,7 +29,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       query: ({ orderId, details }) => ({
         url: `${ORDERS_URL}/${orderId}/pay`, // Endpoint for paying for an order
         method: "PUT", // HTTP method for the request
-        body: details, // The body of the request, containing the payment details
+        body: { ...details }, // The body of the request, containing the payment details
       }),
     }),
     // Create an endpoint for getting the PayPal client ID
